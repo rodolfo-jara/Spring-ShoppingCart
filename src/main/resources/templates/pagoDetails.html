@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Detalles de Pago</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        /* Personaliza el estilo según tus preferencias */
+        .boleta {
+            border: 1px solid #000;
+            margin: 20px;
+            padding: 20px;
+            background-color: #f8f9fa;
+        }
+        .cabecera {
+            background-color: #343a40;
+            color: #fff;
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg bg-primary bg-dark navbar-dark">
+        <div class="container-fluid">
+            <a class="navbar-brand" th:href="@{/productos/index}">Home</a>
+            <a class="navbar-brand" th:href="@{/categoria/list}">Categorías</a>
+        </div>
+    </nav>
+    <h1>Detalles de Pago</h1>
+    <div class="container mt-4">
+        <div class="boleta">
+            <h1 class="cabecera">Perfil del Cliente</h1>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Nombre</th>
+                        <th>Apellidos</th>
+                        <th>Correo</th>
+                        <th>Sexo</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>pedrito</td>
+                        <td>perez</td>
+                        <td>pedrito@gmail.com</td>
+                        <td>M</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="boleta">
+            <h1 class="cabecera">Detalles del Pago</h1>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Imagen</th>
+                        <th>Producto</th>
+                        <th>Cantidad</th>
+                        <th>Precio Unitario</th>
+                        <th>Precio Total</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr th:each="item : ${carrito.items}">
+                        <td>
+                            <img th:src="${item.producto.imagen}" width="100">
+                        </td>
+                        <td th:text="${item.producto.nombre}"></td>
+                        <td th:text="${item.cantidad}"></td>
+                        <td th:text="'S/ ' + ${item.producto.precioUnidad}"></td>
+                        <td th:text="'S/ ' + ${item.cantidad * item.producto.precioUnidad}"></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="text-center">
+			 <a class="btn btn-danger" th:href="@{/categoria/list}">Regresar</a>
+                <a class="btn btn-primary" th:href="@{/carrito/vaciarcarrito}">Pagar Carrito</a>
+                
+
+            </div>
+    </div>
+</body>
+</html>
